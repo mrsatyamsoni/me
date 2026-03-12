@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Satyam Verma | MERN Stack Web Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #fdf2f8, #f8fafc);
+      color: #1e293b;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #fce7f3;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(236,72,153,0.08);
+    }
+    nav .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-brand {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #ec4899;
+    }
+
+    /* Desktop links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-links a {
+      color: #475569;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.98rem;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: #ec4899; }
+
+    /* Hamburger (hidden on desktop) */
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      color: #ec4899;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Mobile menu (hidden by default) */
+    .mobile-menu {
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: white;
+      border-top: 1px solid #fce7f3;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    #menu-toggle:checked ~ .mobile-menu {
+      max-height: 300px; /* adjust if more links */
+    }
+    .mobile-menu a {
+      display: block;
+      padding: 16px 20px;
+      color: #475569;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #fce7f3;
+    }
+    .mobile-menu a:hover { background: #fdf2f8; color: #ec4899; }
+
+    /* Hide checkbox but use it for toggle */
+    #menu-toggle { display: none; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+    }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+    header {
+      padding: 80px 0 30px;
+      text-align: center;
+    }
+    .avatar {
+      width: 100px; height: 100px;
+      margin: 0 auto 8px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid white;
+      box-shadow: 0 6px 18px rgba(236,72,153,0.15);
+      background: #e2e8f0;
+    }
+    .avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin: 4px 0 2px;
+      color: #ec4899;
+    }
+    .tagline {
+      font-size: 1.25rem;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    section { padding: 60px 0; }
+    h2 {
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 36px;
+      color: #ec4899;
+    }
+
+    .skills-container { display: flex; flex-direction: column; gap: 36px; }
+    .category h3 { font-size: 1.45rem; margin-bottom: 20px; color: #334155; }
+    .skill-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .skill-card {
+      background: white;
+      border: 2px solid #fce7f3;
+      border-radius: 12px;
+      padding: 10px 20px;
+      min-width: 130px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(236,72,153,0.06);
+      transition: all 0.25s ease;
+    }
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: #f9a8d4;
+    }
+    .skill-card i { font-size: 3rem; margin-bottom: 3px; }
+    .skill-card span { font-weight: 600; color: #475569; font-size: 0.92rem; line-height: 1.1; }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .project {
+      background: white;
+      border-radius: 14px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      box-shadow: 0 5px 16px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+    .project:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(236,72,153,0.1); }
+    .proj-placeholder {
+      height: 140px;
+      background: linear-gradient(135deg, #fdf2f8, #f3e8ff);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; color: rgba(236,72,153,0.3);
+    }
+    .proj-content { padding: 18px; }
+    .proj-content h3 { font-size: 1.35rem; margin-bottom: 8px; }
+    .proj-content p { color: #475569; font-size: 0.92rem; }
+
+    /* Upgraded Contact */
+    .contact-card {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 25px rgba(236,72,153,0.12);
+      text-align: center;
+      border: 1px solid #fce7f3;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .contact-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 1.3rem;
+      color: #ec4899;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: 2px solid #fce7f3;
+      transition: all 0.3s ease;
+    }
+    .contact-links a:hover {
+      background: #fdf2f8;
+      border-color: #ec4899;
+      transform: translateY(-2px);
+    }
+    .icon { font-size: 1.5rem; }
+
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: #64748b;
+      font-size: 0.9rem;
+      border-top: 1px solid #fce7f3;
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 70px 0 20px; }
+      h1 { font-size: 2.3rem; }
+      .avatar { width: 90px; height: 90px; margin-bottom: 6px; }
+      .skill-card { min-width: 120px; padding: 8px 16px; }
+      .skill-card i { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="nav-brand">Satyam</div>
+
+      <!-- Hamburger toggle (CSS only) -->
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="hamburger">&#9776;</label>
+
+      <!-- Desktop links -->
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="mobile-menu">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div class="avatar">
+      <!-- Replace with your real photo path or URL -->
+      <img src="photo.jpg" alt="Satyam Verma">
+    </div>
+    <h1>Satyam Verma</h1>
+    <div class="tagline">MERN Stack Web Developer</div>
+  </header>
+
+  <div class="container">
+
+    <section id="about">
+      <h2>About Me</h2>
+      <p style="max-width: 680px; margin: 0 auto 24px; text-align: center; font-size: 1.1rem; color: #475569;">
+        Self-taught MERN stack developer from Prayagraj, Uttar Pradesh.<br>
+        Passionate about creating fast, responsive, and user-friendly web applications.<br>
+        Focused on clean code, modern design, and smooth user experiences.
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills-container">
+        <div class="category">
+          <h3>Languages</h3>
+          <div class="skill-cards">
+            <div class="skill-card"><i class="devicon-html5-plain colored"></i><span>HTML</span></div>
+            <div class="skill-card"><i class="devicon-css3-plain colored"></i><span>CSS</span></div>
+            <div class="skill-card"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
+            <div class="skill-card"><i class="devicon-php-plain colored"></i><span>PHP</span></div>
+          </div>
+        </div>
+
+        <div class="category">
+          <h3>Frameworks & Libraries</h3>
+          <div class="skill-cards">
+            <div class="skill-card"><i class="devicon-react-original colored"></i><span>React</span></div>
+            <div class="skill-card"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
+          </div>
+        </div>
+
+        <div class="category">
+          <h3>Databases</h3>
+          <div class="skill-cards">
+            <div class="skill-card"><i class="devicon-mongodb-plain colored"></i><span>MongoDB</span></div>
+            <div class="skill-card"><i class="devicon-mysql-original colored"></i><span>MySQL</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <!-- <div class="project">
+          <div class="proj-placeholder">CMS</div>
+          <div class="proj-content">
+            <h3>Cyber Cafe Management</h3>
+            <p>Customer tracking, billing, printing queue</p>
+          </div>
+        </div>
+        -->
+        Soon
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Get in Touch</h2>
+      <div class="contact-card">
+        <p style="font-size: 1.15rem; color: #475569; margin-bottom: 28px;">
+          Open for collaborations, freelance, or just a chat!
+        </p>
+        <div class="contact-links">
+          <a href="mailto:mrsatyamsoni@gmail.com">
+          
+            <span class="icon">  <i class="fas fa-envelope"></i></span>Mail Us 
+          </a>
+          <a href="https://instagram.com/mrsatyamsoni" target="_blank">
+            <span class="icon"><i class="fab fa-instagram"></i></span> Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 Satyam Verma • All rights reserved
+  </footer>
+
+</body>
+</html>
