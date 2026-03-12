@@ -335,14 +335,33 @@
           Open for collaborations, freelance, or just a chat!
         </p>
         <div class="contact-links">
-          <a href="mailto:mrsatyamsoni@gmail.com" onclick="setTimeout(function(){window.location='https://instagram.com/USERNAME';},500);">
-          
-            <span class="icon">  <i class="fas fa-envelope"></i></span>Mail Us 
-          </a>
-          <a href="instagram://user?username=mrsatyamsoni" target="_blank">
-            <span class="icon"><i class="fab fa-instagram"></i></span> Instagram
-          </a>
-        </div>
+
+  <!-- Email -->
+  <a href="mailto:mrsatyamsoni@gmail.com">
+    <span class="icon"><i class="fas fa-envelope"></i></span> Mail Us
+  </a>
+
+  <!-- Instagram -->
+  <a href="#" onclick="openInstagram()">
+    <span class="icon"><i class="fab fa-instagram"></i></span> Instagram
+  </a>
+
+</div>
+
+<script>
+function openInstagram() {
+  var username = "mrsatyamsoni";
+
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      window.location.href = "instagram://user?username=" + username;
+      setTimeout(function(){
+          window.location.href = "https://instagram.com/" + username;
+      }, 500);
+  } else {
+      window.open("https://instagram.com/" + username, "_blank");
+  }
+}
+</script>
       </div>
     </section>
 
@@ -355,5 +374,6 @@
 </body>
 
 </html>
+
 
 
