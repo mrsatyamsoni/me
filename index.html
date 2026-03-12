@@ -336,31 +336,44 @@
         </p>
         <div class="contact-links">
 
+<div class="contact-links">
+
   <!-- Email -->
   <a href="mailto:mrsatyamsoni@gmail.com">
     <span class="icon"><i class="fas fa-envelope"></i></span> Mail Us
   </a>
 
   <!-- Instagram -->
-  <a href="#" onclick="openInstagram()">
+  <a id="instaLink">
     <span class="icon"><i class="fab fa-instagram"></i></span> Instagram
   </a>
 
 </div>
 
 <script>
-function openInstagram() {
-  var username = "mrsatyamsoni";
+(function () {
 
-  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      window.location.href = "instagram://user?username=" + username;
-      setTimeout(function(){
-          window.location.href = "https://instagram.com/" + username;
-      }, 500);
-  } else {
-      window.open("https://instagram.com/" + username, "_blank");
+  var username = "mrsatyamsoni";
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+
+  var instaLink = document.getElementById("instaLink");
+
+  if (/android/i.test(ua)) {
+      // Android: open Instagram app using intent
+      instaLink.href = "intent://instagram.com/" + username + 
+      "#Intent;package=com.instagram.android;scheme=https;end";
+  } 
+  else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+      // iOS: open Instagram app
+      instaLink.href = "instagram://user?username=" + username;
+  } 
+  else {
+      // Desktop fallback
+      instaLink.href = "https://instagram.com/" + username;
+      instaLink.target = "_blank";
   }
-}
+
+})();
 </script>
       </div>
     </section>
@@ -374,6 +387,7 @@ function openInstagram() {
 </body>
 
 </html>
+
 
 
 
