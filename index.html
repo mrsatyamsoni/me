@@ -351,31 +351,37 @@
 </div>
 
 <script>
-(function () {
+(function(){
 
   var username = "mrsatyamsoni";
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var link = document.getElementById("instaLink");
 
-  var instaLink = document.getElementById("instaLink");
+  var ua = navigator.userAgent.toLowerCase();
 
-  if (/android/i.test(ua)) {
-      // Android: open Instagram app using intent
-      instaLink.href = "intent://instagram.com/" + username + 
+  if (ua.indexOf("android") > -1) {
+
+      // Android → open Instagram app
+      link.href = "intent://instagram.com/" + username +
       "#Intent;package=com.instagram.android;scheme=https;end";
-  } 
-  else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-      // iOS: open Instagram app
-      instaLink.href = "instagram://user?username=" + username;
-  } 
+
+  }
+  else if (/iphone|ipad|ipod/.test(ua)) {
+
+      // iPhone → open Instagram app
+      link.href = "instagram://user?username=" + username;
+
+  }
   else {
-      // Desktop fallback
-      instaLink.href = "https://instagram.com/" + username;
-      instaLink.target = "_blank";
+
+      // Desktop → open website
+      link.href = "https://instagram.com/" + username;
+      link.target = "_blank";
+
   }
 
 })();
 </script>
-      </div>
+      
     </section>
 
   </div>
@@ -387,6 +393,7 @@
 </body>
 
 </html>
+
 
 
 
